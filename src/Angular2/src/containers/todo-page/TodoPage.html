@@ -1,0 +1,12 @@
+﻿<div class="clearfix mx-auto col-8">
+    <h3>TODO App</h3>
+    <div class="clearfix mxn2">
+        <input type="text" [(ngModel)]="task.content" class="input inline-block" />
+        <button class="btn btn-primary inline-block" (click)="add()">Add</button>
+    </div>
+    <div class="clearfix mxn2">
+        <ul class="list-reset" *ngFor="#item of items">
+            <li>{{ item.content }} <span (click)="remove(item)">x</span></li>
+        </ul>
+    </div>
+</div>
