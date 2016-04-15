@@ -1,26 +1,58 @@
-﻿import { Component } from 'angular2/core';
+﻿import {
+    Component,
+    ViewEncapsulation,
+    Inject,
+    ApplicationRef
+} from 'angular2/core';
 
-import { TodoService } from "../../services/ToDoService";
+import * as TodoAction from '../../actions/ToDo';
 
 
 @Component({
     selector: 'ck-todo-app',
-    providers: [TodoService],
     directives: [],
     template: require('./TodoPage.html')
 })
 export class CkTodoApp {
-    task: any = { content: "" };
-    items: any;
+    private disconnect: Function;
+    private unsubscribe: Function;
+        
+    private items: any;
+    private task: any;
 
-    constructor(private _service: TodoService) {
-        this.items = _service.list();
+    constructor(
+        @Inject('ngRedux') private ngRedux,
+        private applicationRef: ApplicationRef) {       
+    }    
+
+    ngOnInit() {
+        this.disconnect = this.ngRedux.connect(
+            this.mapStateToThis,
+            this.mapDispatchToThis)(this);
+
+        this.unsubscribe = this.ngRedux.subscribe(() => {
+            this.applicationRef.tick();
+        });
     }
-    add() {
-        this.items = this._service.add(this.task);
-        this.task = { content: "" };
+
+    ngOnDestroy() {
+        this.unsubscribe();
+        this.disconnect();
     }
-    remove(item) {
-        this.items = this._service.remove(item);
+
+    mapStateToThis(state) {
+        return {
+            items: state.todo,
+            task: state.newtodo
+        };
+    }
+
+    mapDispatchToThis(dispatch) {
+        return {
+            add: (task) => {
+                dispatch(TodoAction.add(Object.assign({}, task)));            
+            },
+            remove: (task) => dispatch(TodoAction.remove(task))
+        };
     }
 };

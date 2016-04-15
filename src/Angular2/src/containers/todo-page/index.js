@@ -8,20 +8,47 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 var core_1 = require('angular2/core');
+var TodoAction = require('../../actions/ToDo');
 var CkTodoApp = (function () {
-    function CkTodoApp() {
+    function CkTodoApp(ngRedux, applicationRef) {
+        this.ngRedux = ngRedux;
+        this.applicationRef = applicationRef;
+        this.task = { content: "" };
     }
-    CkTodoApp.prototype.add = function (task) {
-        console.log(task);
+    CkTodoApp.prototype.ngOnInit = function () {
+        var _this = this;
+        this.disconnect = this.ngRedux.connect(this.mapStateToThis, this.mapDispatchToThis)(this);
+        this.unsubscribe = this.ngRedux.subscribe(function () {
+            _this.applicationRef.tick();
+        });
+    };
+    CkTodoApp.prototype.ngOnDestroy = function () {
+        this.unsubscribe();
+        this.disconnect();
+    };
+    CkTodoApp.prototype.mapStateToThis = function (state) {
+        return {
+            items: state
+        };
+    };
+    CkTodoApp.prototype.mapDispatchToThis = function (dispatch) {
+        return {
+            add: function (task) { return dispatch(TodoAction.add(task)); },
+            remove: function (task) { return dispatch(TodoAction.remove(task)); }
+        };
     };
     CkTodoApp = __decorate([
         core_1.Component({
             selector: 'ck-todo-app',
             directives: [],
             template: require('./TodoPage.html')
-        }), 
-        __metadata('design:paramtypes', [])
+        }),
+        __param(0, core_1.Inject('ngRedux')), 
+        __metadata('design:paramtypes', [Object, core_1.ApplicationRef])
     ], CkTodoApp);
     return CkTodoApp;
 }());
