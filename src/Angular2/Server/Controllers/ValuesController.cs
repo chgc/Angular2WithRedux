@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
+using Angular2.Model;
 
 namespace Angular2.Controllers
 {
@@ -11,9 +12,13 @@ namespace Angular2.Controllers
     {
         // GET: api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public List<Todo> Get()
         {
-            return new string[] { "value1", "value2" };
+            var list = new List<Todo>();
+            list.Add(new Todo() { content = "Value1" });
+            list.Add(new Todo() { content = "Value2" });
+            
+            return list;
         }
 
         // GET api/values/5

@@ -5,7 +5,7 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
     "clean": "rimraf dist/",
-    "dev": "cross-env NODE_ENV=development webpack -d --inline --progress --no-info",
+    "dev": "cross-env NODE_ENV=development webpack -w -d --inline --progress --no-info",
     "typings": "rimraf typings/ && typings install"
   },
   "author": "",

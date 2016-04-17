@@ -6,25 +6,33 @@
 } from 'angular2/core';
 
 import * as TodoAction from '../../actions/ToDo';
+import {TodoService} from '../../services/TodoService.ts';
 
 
 @Component({
     selector: 'ck-todo-app',
+    providers: [TodoService],
     directives: [],
     template: require('./TodoPage.html')
 })
 export class CkTodoApp {
     private disconnect: Function;
     private unsubscribe: Function;
-        
+
     private items: any;
     private task: any;
 
     constructor(
         @Inject('ngRedux') private ngRedux,
-        private applicationRef: ApplicationRef) {       
-    }    
+        private applicationRef: ApplicationRef,
+        private todoService: TodoService) {
+        
+        this.todoService.getTodo().subscribe((data) => {
+            this.ngRedux.dispatch(TodoAction.init(data));    
+        })
+    }
 
+ß
     ngOnInit() {
         this.disconnect = this.ngRedux.connect(
             this.mapStateToThis,
@@ -50,7 +58,7 @@ export class CkTodoApp {
     mapDispatchToThis(dispatch) {
         return {
             add: (task) => {
-                dispatch(TodoAction.add(Object.assign({}, task)));            
+                dispatch(TodoAction.add(Object.assign({}, task)));
             },
             remove: (task) => dispatch(TodoAction.remove(task))
         };

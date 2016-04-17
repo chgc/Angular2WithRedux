@@ -7,9 +7,14 @@ import rootReducer from '../reducers';
 const persistState = require('redux-localstorage');
 
 function configureStore(initialState) {
+
+    // const store = compose(
+    //     _getMiddleware(),
+    //     ..._getEnhancers()
+    // )(createStore)(rootReducer, initialState);
+
     const store = compose(
-        _getMiddleware(),
-        ..._getEnhancers()
+        _getMiddleware()
     )(createStore)(rootReducer, initialState);
 
     return store;

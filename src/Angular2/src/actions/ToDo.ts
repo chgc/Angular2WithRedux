@@ -1,4 +1,13 @@
-﻿import { TODO_ADD, TODO_REMOVE } from '../constants';
+﻿import { TODO_ADD, TODO_REMOVE, TODO_INIT } from '../constants';
+
+export function init(data) {
+    
+    return {
+        type: TODO_INIT,
+        data: data
+    }
+
+}
 export function add(task) {
     return {
         type: TODO_ADD,
