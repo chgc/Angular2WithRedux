@@ -41,7 +41,6 @@ export class CkTodoApp {
             this.mapDispatchToThis)(this);
 
         this.unsubscribe = this.ngRedux.subscribe(() => {
-            let state = this.ngRedux.getState();
             this.applicationRef.tick();
         });
     }

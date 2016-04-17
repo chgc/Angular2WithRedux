@@ -1348,7 +1348,6 @@ webpackJsonp([0],{
 	        var _this = this;
 	        this.disconnect = this.ngRedux.connect(this.mapStateToThis, this.mapDispatchToThis)(this);
 	        this.unsubscribe = this.ngRedux.subscribe(function () {
-	            var state = _this.ngRedux.getState();
 	            _this.applicationRef.tick();
 	        });
 	    };
