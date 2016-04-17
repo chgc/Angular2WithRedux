@@ -1,4 +1,7 @@
 ﻿import { TODO_ADD, TODO_REMOVE, TODO_INIT, TODO_COMPLETE, TODO_FILTER } from '../constants';
+import 'rxjs/Rx';
+import 'whatwg-fetch';
+
 var uuid = require('uuid');
 
 export function add(task) {
@@ -28,4 +31,27 @@ export function setFilter(filter) {
         type: TODO_FILTER,
         filter: filter
     }
+}
+
+function load(data) {
+    return
+}
+
+export function loadTodo() {
+    return dispatch => {
+        return fetch('api/Values')
+            .then((response) => {
+                return response.json()
+            })
+            .then((data) => {
+                return ({
+                    type: TODO_INIT,
+                    payload: data
+                });
+            })
+            .then((action) => {
+                dispatch(action);
+            })
+    }
+
 }

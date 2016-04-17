@@ -13,7 +13,7 @@ webpackJsonp([0],{
 	var router_1 = __webpack_require__(/*! angular2/router */ 244);
 	var configure_store_1 = __webpack_require__(/*! ./store/configure-store */ 274);
 	var main_app_1 = __webpack_require__(/*! ./containers/main-app */ 296);
-	var provider = __webpack_require__(/*! ng2-redux */ 540).provider;
+	var provider = __webpack_require__(/*! ng2-redux */ 543).provider;
 	var store = configure_store_1.default({});
 	if (false) {
 	    core_1.enableProdMode();
@@ -1289,7 +1289,7 @@ webpackJsonp([0],{
 	            ],
 	            // Global styles imported in the app component.
 	            encapsulation: core_1.ViewEncapsulation.None,
-	            styles: [__webpack_require__(/*! ../styles/index.css */ 539)],
+	            styles: [__webpack_require__(/*! ../styles/index.css */ 542)],
 	            template: "\n    <div>\n        <h1>\n            Hello there. this is asp.net with angular2. build by webpack.\n      </h1>\n      <br />\n      <main>\n           <router-outlet></router-outlet>\n      </main>\n    </div>\n  "
 	        }),
 	        router_1.RouteConfig([
@@ -1331,15 +1331,16 @@ webpackJsonp([0],{
 	};
 	var core_1 = __webpack_require__(/*! angular2/core */ 1);
 	var TodoAction = __webpack_require__(/*! ../../actions/ToDo */ 298);
-	var TodoService_ts_1 = __webpack_require__(/*! ../../services/TodoService.ts */ 301);
-	var visiblefilter_1 = __webpack_require__(/*! ../../pipes/visiblefilter */ 553);
+	var TodoService_ts_1 = __webpack_require__(/*! ../../services/TodoService.ts */ 539);
+	var visiblefilter_1 = __webpack_require__(/*! ../../pipes/visiblefilter */ 540);
 	var CkTodoApp = (function () {
 	    function CkTodoApp(ngRedux, applicationRef, todoService) {
 	        this.ngRedux = ngRedux;
 	        this.applicationRef = applicationRef;
 	        this.todoService = todoService;
 	        this.currentFilter = "";
-	        this.todoService.loadTodo();
+	        // this.todoService.loadTodo();
+	        this.ngRedux.dispatch(TodoAction.loadTodo());
 	    }
 	    CkTodoApp.prototype.setFilter = function (filter) {
 	        this.ngRedux.dispatch(TodoAction.setFilter(filter));
@@ -1375,7 +1376,7 @@ webpackJsonp([0],{
 	            providers: [TodoService_ts_1.TodoService],
 	            directives: [],
 	            pipes: [visiblefilter_1.visibleFilter],
-	            template: __webpack_require__(/*! ./TodoPage.html */ 538)
+	            template: __webpack_require__(/*! ./TodoPage.html */ 541)
 	        }),
 	        __param(0, core_1.Inject('ngRedux')), 
 	        __metadata('design:paramtypes', [Object, core_1.ApplicationRef, TodoService_ts_1.TodoService])
@@ -1394,9 +1395,11 @@ webpackJsonp([0],{
   \*****************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	/* WEBPACK VAR INJECTION */(function(fetch) {"use strict";
 	var constants_1 = __webpack_require__(/*! ../constants */ 290);
-	var uuid = __webpack_require__(/*! uuid */ 299);
+	__webpack_require__(/*! rxjs/Rx */ 300);
+	__webpack_require__(/*! whatwg-fetch */ 536);
+	var uuid = __webpack_require__(/*! uuid */ 537);
 	function add(task) {
 	    task.id = uuid.v4();
 	    return {
@@ -1427,11 +1430,440 @@ webpackJsonp([0],{
 	    };
 	}
 	exports.setFilter = setFilter;
-
+	function load(data) {
+	    return;
+	}
+	function loadTodo() {
+	    return function (dispatch) {
+	        return fetch('api/Values')
+	            .then(function (response) {
+	            return response.json();
+	        })
+	            .then(function (data) {
+	            return ({
+	                type: constants_1.TODO_INIT,
+	                payload: data
+	            });
+	        })
+	            .then(function (action) {
+	            dispatch(action);
+	        });
+	    };
+	}
+	exports.loadTodo = loadTodo;
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! imports?this=>global!exports?global.fetch!whatwg-fetch */ 299)))
 
 /***/ },
 
-/***/ 301:
+/***/ 299:
+/*!*************************************************************************************************!*\
+  !*** ./~/imports-loader?this=>global!./~/exports-loader?global.fetch!./~/whatwg-fetch/fetch.js ***!
+  \*************************************************************************************************/
+/***/ function(module, exports) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {/*** IMPORTS FROM imports-loader ***/
+	(function() {
+	
+	(function(self) {
+	  'use strict';
+	
+	  if (self.fetch) {
+	    return
+	  }
+	
+	  function normalizeName(name) {
+	    if (typeof name !== 'string') {
+	      name = String(name)
+	    }
+	    if (/[^a-z0-9\-#$%&'*+.\^_`|~]/i.test(name)) {
+	      throw new TypeError('Invalid character in header field name')
+	    }
+	    return name.toLowerCase()
+	  }
+	
+	  function normalizeValue(value) {
+	    if (typeof value !== 'string') {
+	      value = String(value)
+	    }
+	    return value
+	  }
+	
+	  function Headers(headers) {
+	    this.map = {}
+	
+	    if (headers instanceof Headers) {
+	      headers.forEach(function(value, name) {
+	        this.append(name, value)
+	      }, this)
+	
+	    } else if (headers) {
+	      Object.getOwnPropertyNames(headers).forEach(function(name) {
+	        this.append(name, headers[name])
+	      }, this)
+	    }
+	  }
+	
+	  Headers.prototype.append = function(name, value) {
+	    name = normalizeName(name)
+	    value = normalizeValue(value)
+	    var list = this.map[name]
+	    if (!list) {
+	      list = []
+	      this.map[name] = list
+	    }
+	    list.push(value)
+	  }
+	
+	  Headers.prototype['delete'] = function(name) {
+	    delete this.map[normalizeName(name)]
+	  }
+	
+	  Headers.prototype.get = function(name) {
+	    var values = this.map[normalizeName(name)]
+	    return values ? values[0] : null
+	  }
+	
+	  Headers.prototype.getAll = function(name) {
+	    return this.map[normalizeName(name)] || []
+	  }
+	
+	  Headers.prototype.has = function(name) {
+	    return this.map.hasOwnProperty(normalizeName(name))
+	  }
+	
+	  Headers.prototype.set = function(name, value) {
+	    this.map[normalizeName(name)] = [normalizeValue(value)]
+	  }
+	
+	  Headers.prototype.forEach = function(callback, thisArg) {
+	    Object.getOwnPropertyNames(this.map).forEach(function(name) {
+	      this.map[name].forEach(function(value) {
+	        callback.call(thisArg, value, name, this)
+	      }, this)
+	    }, this)
+	  }
+	
+	  function consumed(body) {
+	    if (body.bodyUsed) {
+	      return Promise.reject(new TypeError('Already read'))
+	    }
+	    body.bodyUsed = true
+	  }
+	
+	  function fileReaderReady(reader) {
+	    return new Promise(function(resolve, reject) {
+	      reader.onload = function() {
+	        resolve(reader.result)
+	      }
+	      reader.onerror = function() {
+	        reject(reader.error)
+	      }
+	    })
+	  }
+	
+	  function readBlobAsArrayBuffer(blob) {
+	    var reader = new FileReader()
+	    reader.readAsArrayBuffer(blob)
+	    return fileReaderReady(reader)
+	  }
+	
+	  function readBlobAsText(blob) {
+	    var reader = new FileReader()
+	    reader.readAsText(blob)
+	    return fileReaderReady(reader)
+	  }
+	
+	  var support = {
+	    blob: 'FileReader' in self && 'Blob' in self && (function() {
+	      try {
+	        new Blob();
+	        return true
+	      } catch(e) {
+	        return false
+	      }
+	    })(),
+	    formData: 'FormData' in self,
+	    arrayBuffer: 'ArrayBuffer' in self
+	  }
+	
+	  function Body() {
+	    this.bodyUsed = false
+	
+	
+	    this._initBody = function(body) {
+	      this._bodyInit = body
+	      if (typeof body === 'string') {
+	        this._bodyText = body
+	      } else if (support.blob && Blob.prototype.isPrototypeOf(body)) {
+	        this._bodyBlob = body
+	      } else if (support.formData && FormData.prototype.isPrototypeOf(body)) {
+	        this._bodyFormData = body
+	      } else if (!body) {
+	        this._bodyText = ''
+	      } else if (support.arrayBuffer && ArrayBuffer.prototype.isPrototypeOf(body)) {
+	        // Only support ArrayBuffers for POST method.
+	        // Receiving ArrayBuffers happens via Blobs, instead.
+	      } else {
+	        throw new Error('unsupported BodyInit type')
+	      }
+	
+	      if (!this.headers.get('content-type')) {
+	        if (typeof body === 'string') {
+	          this.headers.set('content-type', 'text/plain;charset=UTF-8')
+	        } else if (this._bodyBlob && this._bodyBlob.type) {
+	          this.headers.set('content-type', this._bodyBlob.type)
+	        }
+	      }
+	    }
+	
+	    if (support.blob) {
+	      this.blob = function() {
+	        var rejected = consumed(this)
+	        if (rejected) {
+	          return rejected
+	        }
+	
+	        if (this._bodyBlob) {
+	          return Promise.resolve(this._bodyBlob)
+	        } else if (this._bodyFormData) {
+	          throw new Error('could not read FormData body as blob')
+	        } else {
+	          return Promise.resolve(new Blob([this._bodyText]))
+	        }
+	      }
+	
+	      this.arrayBuffer = function() {
+	        return this.blob().then(readBlobAsArrayBuffer)
+	      }
+	
+	      this.text = function() {
+	        var rejected = consumed(this)
+	        if (rejected) {
+	          return rejected
+	        }
+	
+	        if (this._bodyBlob) {
+	          return readBlobAsText(this._bodyBlob)
+	        } else if (this._bodyFormData) {
+	          throw new Error('could not read FormData body as text')
+	        } else {
+	          return Promise.resolve(this._bodyText)
+	        }
+	      }
+	    } else {
+	      this.text = function() {
+	        var rejected = consumed(this)
+	        return rejected ? rejected : Promise.resolve(this._bodyText)
+	      }
+	    }
+	
+	    if (support.formData) {
+	      this.formData = function() {
+	        return this.text().then(decode)
+	      }
+	    }
+	
+	    this.json = function() {
+	      return this.text().then(JSON.parse)
+	    }
+	
+	    return this
+	  }
+	
+	  // HTTP methods whose capitalization should be normalized
+	  var methods = ['DELETE', 'GET', 'HEAD', 'OPTIONS', 'POST', 'PUT']
+	
+	  function normalizeMethod(method) {
+	    var upcased = method.toUpperCase()
+	    return (methods.indexOf(upcased) > -1) ? upcased : method
+	  }
+	
+	  function Request(input, options) {
+	    options = options || {}
+	    var body = options.body
+	    if (Request.prototype.isPrototypeOf(input)) {
+	      if (input.bodyUsed) {
+	        throw new TypeError('Already read')
+	      }
+	      this.url = input.url
+	      this.credentials = input.credentials
+	      if (!options.headers) {
+	        this.headers = new Headers(input.headers)
+	      }
+	      this.method = input.method
+	      this.mode = input.mode
+	      if (!body) {
+	        body = input._bodyInit
+	        input.bodyUsed = true
+	      }
+	    } else {
+	      this.url = input
+	    }
+	
+	    this.credentials = options.credentials || this.credentials || 'omit'
+	    if (options.headers || !this.headers) {
+	      this.headers = new Headers(options.headers)
+	    }
+	    this.method = normalizeMethod(options.method || this.method || 'GET')
+	    this.mode = options.mode || this.mode || null
+	    this.referrer = null
+	
+	    if ((this.method === 'GET' || this.method === 'HEAD') && body) {
+	      throw new TypeError('Body not allowed for GET or HEAD requests')
+	    }
+	    this._initBody(body)
+	  }
+	
+	  Request.prototype.clone = function() {
+	    return new Request(this)
+	  }
+	
+	  function decode(body) {
+	    var form = new FormData()
+	    body.trim().split('&').forEach(function(bytes) {
+	      if (bytes) {
+	        var split = bytes.split('=')
+	        var name = split.shift().replace(/\+/g, ' ')
+	        var value = split.join('=').replace(/\+/g, ' ')
+	        form.append(decodeURIComponent(name), decodeURIComponent(value))
+	      }
+	    })
+	    return form
+	  }
+	
+	  function headers(xhr) {
+	    var head = new Headers()
+	    var pairs = xhr.getAllResponseHeaders().trim().split('\n')
+	    pairs.forEach(function(header) {
+	      var split = header.trim().split(':')
+	      var key = split.shift().trim()
+	      var value = split.join(':').trim()
+	      head.append(key, value)
+	    })
+	    return head
+	  }
+	
+	  Body.call(Request.prototype)
+	
+	  function Response(bodyInit, options) {
+	    if (!options) {
+	      options = {}
+	    }
+	
+	    this.type = 'default'
+	    this.status = options.status
+	    this.ok = this.status >= 200 && this.status < 300
+	    this.statusText = options.statusText
+	    this.headers = options.headers instanceof Headers ? options.headers : new Headers(options.headers)
+	    this.url = options.url || ''
+	    this._initBody(bodyInit)
+	  }
+	
+	  Body.call(Response.prototype)
+	
+	  Response.prototype.clone = function() {
+	    return new Response(this._bodyInit, {
+	      status: this.status,
+	      statusText: this.statusText,
+	      headers: new Headers(this.headers),
+	      url: this.url
+	    })
+	  }
+	
+	  Response.error = function() {
+	    var response = new Response(null, {status: 0, statusText: ''})
+	    response.type = 'error'
+	    return response
+	  }
+	
+	  var redirectStatuses = [301, 302, 303, 307, 308]
+	
+	  Response.redirect = function(url, status) {
+	    if (redirectStatuses.indexOf(status) === -1) {
+	      throw new RangeError('Invalid status code')
+	    }
+	
+	    return new Response(null, {status: status, headers: {location: url}})
+	  }
+	
+	  self.Headers = Headers;
+	  self.Request = Request;
+	  self.Response = Response;
+	
+	  self.fetch = function(input, init) {
+	    return new Promise(function(resolve, reject) {
+	      var request
+	      if (Request.prototype.isPrototypeOf(input) && !init) {
+	        request = input
+	      } else {
+	        request = new Request(input, init)
+	      }
+	
+	      var xhr = new XMLHttpRequest()
+	
+	      function responseURL() {
+	        if ('responseURL' in xhr) {
+	          return xhr.responseURL
+	        }
+	
+	        // Avoid security warnings on getResponseHeader when not allowed by CORS
+	        if (/^X-Request-URL:/m.test(xhr.getAllResponseHeaders())) {
+	          return xhr.getResponseHeader('X-Request-URL')
+	        }
+	
+	        return;
+	      }
+	
+	      xhr.onload = function() {
+	        var status = (xhr.status === 1223) ? 204 : xhr.status
+	        if (status < 100 || status > 599) {
+	          reject(new TypeError('Network request failed'))
+	          return
+	        }
+	        var options = {
+	          status: status,
+	          statusText: xhr.statusText,
+	          headers: headers(xhr),
+	          url: responseURL()
+	        }
+	        var body = 'response' in xhr ? xhr.response : xhr.responseText;
+	        resolve(new Response(body, options))
+	      }
+	
+	      xhr.onerror = function() {
+	        reject(new TypeError('Network request failed'))
+	      }
+	
+	      xhr.open(request.method, request.url, true)
+	
+	      if (request.credentials === 'include') {
+	        xhr.withCredentials = true
+	      }
+	
+	      if ('responseType' in xhr && support.blob) {
+	        xhr.responseType = 'blob'
+	      }
+	
+	      request.headers.forEach(function(value, name) {
+	        xhr.setRequestHeader(name, value)
+	      })
+	
+	      xhr.send(typeof request._bodyInit === 'undefined' ? null : request._bodyInit)
+	    })
+	  }
+	  self.fetch.polyfill = true
+	})(typeof self !== 'undefined' ? self : this);
+	
+	
+	/*** EXPORTS FROM exports-loader ***/
+	module.exports = global.fetch;
+	}.call(global));
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+
+/***/ 539:
 /*!*************************************!*\
   !*** ./src/services/TodoService.ts ***!
   \*************************************/
@@ -1452,7 +1884,7 @@ webpackJsonp([0],{
 	};
 	var core_1 = __webpack_require__(/*! angular2/core */ 1);
 	var http_1 = __webpack_require__(/*! angular2/http */ 229);
-	__webpack_require__(/*! rxjs/Rx */ 302);
+	__webpack_require__(/*! rxjs/Rx */ 300);
 	var constants_1 = __webpack_require__(/*! ../constants */ 290);
 	var TodoService = (function () {
 	    function TodoService(store, http) {
@@ -1483,7 +1915,65 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 538:
+/***/ 540:
+/*!************************************!*\
+  !*** ./src/pipes/visiblefilter.ts ***!
+  \************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var lang_1 = __webpack_require__(/*! angular2/src/facade/lang */ 4);
+	var exceptions_1 = __webpack_require__(/*! angular2/src/facade/exceptions */ 13);
+	var core_1 = __webpack_require__(/*! angular2/core */ 1);
+	var visibleFilter = (function () {
+	    function visibleFilter() {
+	    }
+	    visibleFilter.prototype.transform = function (todos, args) {
+	        var data = [];
+	        if (lang_1.isBlank(args) || args.length == 0) {
+	            throw new exceptions_1.BaseException('VisibleTodos pipe requires one argument');
+	        }
+	        if (todos) {
+	            data = todos.toArray();
+	        }
+	        if (lang_1.isPresent(data) && !lang_1.isArray(data)) {
+	            throw new exceptions_1.BaseException('VisibleTodos pipe requires an Array as input');
+	        }
+	        return this.getVisibleTodos(data, args[0]);
+	    };
+	    visibleFilter.prototype.getVisibleTodos = function (todos, filter) {
+	        switch (filter) {
+	            case 'SHOW_ACTIVE':
+	                return todos.filter(function (t) { return !t.complete; });
+	            case 'SHOW_COMPLETE':
+	                return todos.filter(function (t) { return t.complete; });
+	            default:
+	                return todos;
+	        }
+	    };
+	    visibleFilter = __decorate([
+	        core_1.Pipe({
+	            name: 'visibleFilter'
+	        }), 
+	        __metadata('design:paramtypes', [])
+	    ], visibleFilter);
+	    return visibleFilter;
+	}());
+	exports.visibleFilter = visibleFilter;
+
+
+/***/ },
+
+/***/ 541:
 /*!************************************************!*\
   !*** ./src/containers/todo-page/TodoPage.html ***!
   \************************************************/
@@ -1493,7 +1983,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 539:
+/***/ 542:
 /*!******************************!*\
   !*** ./src/styles/index.css ***!
   \******************************/
@@ -1503,7 +1993,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 540:
+/***/ 543:
 /*!**********************************!*\
   !*** ./~/ng2-redux/lib/index.js ***!
   \**********************************/
@@ -1513,13 +2003,13 @@ webpackJsonp([0],{
 	
 	exports.__esModule = true;
 	
-	var _componentsProvider = __webpack_require__(/*! ./components/provider */ 541);
+	var _componentsProvider = __webpack_require__(/*! ./components/provider */ 544);
 	
 	exports.provider = _componentsProvider.provider;
 
 /***/ },
 
-/***/ 541:
+/***/ 544:
 /*!************************************************!*\
   !*** ./~/ng2-redux/lib/components/provider.js ***!
   \************************************************/
@@ -1535,7 +2025,7 @@ webpackJsonp([0],{
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _connector2 = __webpack_require__(/*! ./connector */ 542);
+	var _connector2 = __webpack_require__(/*! ./connector */ 545);
 	
 	var _connector3 = _interopRequireDefault(_connector2);
 	
@@ -1570,7 +2060,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 542:
+/***/ 545:
 /*!*************************************************!*\
   !*** ./~/ng2-redux/lib/components/connector.js ***!
   \*************************************************/
@@ -1584,19 +2074,19 @@ webpackJsonp([0],{
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	var _utilsShallowEqual = __webpack_require__(/*! ../utils/shallowEqual */ 543);
+	var _utilsShallowEqual = __webpack_require__(/*! ../utils/shallowEqual */ 546);
 	
 	var _utilsShallowEqual2 = _interopRequireDefault(_utilsShallowEqual);
 	
-	var _utilsWrapActionCreators = __webpack_require__(/*! ../utils/wrapActionCreators */ 544);
+	var _utilsWrapActionCreators = __webpack_require__(/*! ../utils/wrapActionCreators */ 547);
 	
 	var _utilsWrapActionCreators2 = _interopRequireDefault(_utilsWrapActionCreators);
 	
-	var _invariant = __webpack_require__(/*! invariant */ 545);
+	var _invariant = __webpack_require__(/*! invariant */ 548);
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
-	var _lodash = __webpack_require__(/*! lodash */ 546);
+	var _lodash = __webpack_require__(/*! lodash */ 549);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
@@ -1671,7 +2161,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 543:
+/***/ 546:
 /*!***********************************************!*\
   !*** ./~/ng2-redux/lib/utils/shallowEqual.js ***!
   \***********************************************/
@@ -1709,7 +2199,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 544:
+/***/ 547:
 /*!*****************************************************!*\
   !*** ./~/ng2-redux/lib/utils/wrapActionCreators.js ***!
   \*****************************************************/
@@ -1732,7 +2222,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 545:
+/***/ 548:
 /*!********************************!*\
   !*** ./~/invariant/browser.js ***!
   \********************************/
@@ -1793,7 +2283,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 546:
+/***/ 549:
 /*!***************************************!*\
   !*** ./~/ng2-redux/~/lodash/index.js ***!
   \***************************************/
@@ -14152,64 +14642,6 @@ webpackJsonp([0],{
 	}.call(this));
 	
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../../webpack/buildin/module.js */ 52)(module), (function() { return this; }())))
-
-/***/ },
-
-/***/ 553:
-/*!************************************!*\
-  !*** ./src/pipes/visiblefilter.ts ***!
-  \************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-	    return c > 3 && r && Object.defineProperty(target, key, r), r;
-	};
-	var __metadata = (this && this.__metadata) || function (k, v) {
-	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-	};
-	var lang_1 = __webpack_require__(/*! angular2/src/facade/lang */ 4);
-	var exceptions_1 = __webpack_require__(/*! angular2/src/facade/exceptions */ 13);
-	var core_1 = __webpack_require__(/*! angular2/core */ 1);
-	var visibleFilter = (function () {
-	    function visibleFilter() {
-	    }
-	    visibleFilter.prototype.transform = function (todos, args) {
-	        var data = [];
-	        if (lang_1.isBlank(args) || args.length == 0) {
-	            throw new exceptions_1.BaseException('VisibleTodos pipe requires one argument');
-	        }
-	        if (todos) {
-	            data = todos.toArray();
-	        }
-	        if (lang_1.isPresent(data) && !lang_1.isArray(data)) {
-	            throw new exceptions_1.BaseException('VisibleTodos pipe requires an Array as input');
-	        }
-	        return this.getVisibleTodos(data, args[0]);
-	    };
-	    visibleFilter.prototype.getVisibleTodos = function (todos, filter) {
-	        switch (filter) {
-	            case 'SHOW_ACTIVE':
-	                return todos.filter(function (t) { return !t.complete; });
-	            case 'SHOW_COMPLETE':
-	                return todos.filter(function (t) { return t.complete; });
-	            default:
-	                return todos;
-	        }
-	    };
-	    visibleFilter = __decorate([
-	        core_1.Pipe({
-	            name: 'visibleFilter'
-	        }), 
-	        __metadata('design:paramtypes', [])
-	    ], visibleFilter);
-	    return visibleFilter;
-	}());
-	exports.visibleFilter = visibleFilter;
-
 
 /***/ }
 

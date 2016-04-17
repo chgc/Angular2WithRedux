@@ -6,7 +6,11 @@ var redux_thunk_1 = require('redux-thunk');
 var reducers_1 = require('../reducers');
 var persistState = require('redux-localstorage');
 function configureStore(initialState) {
-    var store = redux_1.compose.apply(void 0, [_getMiddleware()].concat(_getEnhancers()))(redux_1.createStore)(reducers_1.default, initialState);
+    // const store = compose(
+    //     _getMiddleware(),
+    //     ..._getEnhancers()
+    // )(createStore)(rootReducer, initialState);
+    var store = redux_1.compose(_getMiddleware())(redux_1.createStore)(reducers_1.default, initialState);
     return store;
 }
 function _getMiddleware() {

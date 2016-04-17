@@ -16,7 +16,10 @@ const basePlugins = [
         template: './src/index.html',
         inject: 'body',
         minify: false
-    })
+    }),
+    new webpack.ProvidePlugin({
+    'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+  })
 ];
 
 const devPlugins = [];
@@ -54,7 +57,8 @@ module.exports = {
             'angular2/http',
             'immutable',
             'rxjs/Rx',
-            'uuid'
+            'uuid',
+            'whatwg-fetch'
         ]
     },
 

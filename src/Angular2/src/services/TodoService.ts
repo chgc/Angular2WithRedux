@@ -13,7 +13,6 @@ export class TodoService {
         private http: Http) {
 
     }
-
     loadTodo() {
         return this.http.get('api/Values')
             .map((res) => { return res.json() })
