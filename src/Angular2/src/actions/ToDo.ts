@@ -33,10 +33,6 @@ export function setFilter(filter) {
     }
 }
 
-function load(data) {
-    return
-}
-
 export function loadTodo() {
     return dispatch => {
         return fetch('api/Values')

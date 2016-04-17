@@ -1430,9 +1430,6 @@ webpackJsonp([0],{
 	    };
 	}
 	exports.setFilter = setFilter;
-	function load(data) {
-	    return;
-	}
 	function loadTodo() {
 	    return function (dispatch) {
 	        return fetch('api/Values')
