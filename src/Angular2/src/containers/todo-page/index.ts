@@ -43,7 +43,6 @@ export class CkTodoApp {
         this.unsubscribe = this.ngRedux.subscribe(() => {
             let state = this.ngRedux.getState();
             this.applicationRef.tick();
-            this.items = state.todo.todos;
         });
     }
 
@@ -54,6 +53,7 @@ export class CkTodoApp {
 
     mapStateToThis(state) {
         return {
+            items: state.todo.todos,
             currentFilter: state.todo.current_filter,
             task: state.newtodo
         };

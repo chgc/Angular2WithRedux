@@ -1350,7 +1350,6 @@ webpackJsonp([0],{
 	        this.unsubscribe = this.ngRedux.subscribe(function () {
 	            var state = _this.ngRedux.getState();
 	            _this.applicationRef.tick();
-	            _this.items = state.todo.todos;
 	        });
 	    };
 	    CkTodoApp.prototype.ngOnDestroy = function () {
@@ -1359,6 +1358,7 @@ webpackJsonp([0],{
 	    };
 	    CkTodoApp.prototype.mapStateToThis = function (state) {
 	        return {
+	            items: state.todo.todos,
 	            currentFilter: state.todo.current_filter,
 	            task: state.newtodo
 	        };
