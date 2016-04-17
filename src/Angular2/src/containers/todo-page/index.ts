@@ -51,12 +51,11 @@ export class CkTodoApp {
             task: state.newtodo
         };
     }
-
+    
     mapDispatchToThis(dispatch) {
         return {
-            add: (task) => {
-                dispatch(TodoAction.add(Object.assign({}, task)));
-            },
+            add: (task) => dispatch(TodoAction.add(Object.assign({}, task))),
+            finish: (task) => dispatch(TodoAction.finish(task)),
             remove: (task) => dispatch(TodoAction.remove(task))
         };
     }

@@ -1,23 +1,24 @@
-﻿import { TODO_ADD, TODO_REMOVE, TODO_INIT } from '../constants';
+﻿import { TODO_ADD, TODO_REMOVE, TODO_INIT, TODO_COMPLETE } from '../constants';
+var uuid = require('uuid');
 
-export function init(data) {
-    
-    return {
-        type: TODO_INIT,
-        data: data
-    }
-
-}
 export function add(task) {
+    task.id = uuid.v4();
     return {
         type: TODO_ADD,
-        data: task
+        payload: task
+    }
+}
+export function finish(task) {
+    task.complete = !task.complete;
+    return {
+        type: TODO_COMPLETE,
+        payload: task
     }
 }
 
 export function remove(task) {
     return {
         type: TODO_REMOVE,
-        data: task
+        payload: task
     }
 }

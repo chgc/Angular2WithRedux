@@ -6,7 +6,10 @@
     </div>
     <div class="clearfix mxn2">
         <ul class="list-reset" *ngFor="#item of items">
-            <li>{{ item.content }} <span (click)="remove(item)">x</span></li>
+            <li [ngClass]="{'underline':item.complete}">
+                <button (click)="finish(item)">finish</button>
+                {{ item.content }} <span (click)="remove(item)">x</span>
+                </li>
         </ul>
     </div>
 </div>

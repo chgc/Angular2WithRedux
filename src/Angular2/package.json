@@ -11,7 +11,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-   
   },
   "devDependencies": {
     "angular2": "2.0.0-beta.14",
@@ -42,8 +41,8 @@
     "file-loader": "^0.8.5",
     "html-webpack-plugin": "^2.7.2",
     "html5-history-api": "^4.2.7",
-    "ng2-redux": "^2.0.2",
     "immutable": "^3.7.6",
+    "ng2-redux": "^2.0.2",
     "postcss-cssnext": "^2.4.0",
     "postcss-import": "^8.0.2",
     "postcss-loader": "^0.8.1",
@@ -64,6 +63,7 @@
     "typescript": "^1.8.6",
     "typings": "^0.7.9",
     "url-loader": "^0.5.7",
+    "uuid": "^2.0.2",
     "webpack": "^1.12.12",
     "webpack-dev-server": "^1.14.1",
     "webpack-hot-middleware": "^2.9.1",
