@@ -2,3 +2,4 @@
 export const TODO_REMOVE = 'App/TODO_REMOVE';
 export const TODO_INIT = 'App/TODO_INIT';
 export const TODO_COMPLETE = 'App/TODO_COMPLETE';
+export const TODO_FILTER = 'App/TODO_FILTER';

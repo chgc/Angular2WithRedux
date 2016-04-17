@@ -7,12 +7,13 @@
 
 import * as TodoAction from '../../actions/ToDo';
 import {TodoService} from '../../services/TodoService.ts';
-
+import {visibleFilter} from '../../pipes/visiblefilter';
 
 @Component({
     selector: 'ck-todo-app',
     providers: [TodoService],
     directives: [],
+    pipes: [visibleFilter],
     template: require('./TodoPage.html')
 })
 export class CkTodoApp {
@@ -21,13 +22,17 @@ export class CkTodoApp {
 
     private items: any;
     private task: any;
+    private currentFilter: string = "";
 
     constructor(
         @Inject('ngRedux') private ngRedux,
         private applicationRef: ApplicationRef,
         private todoService: TodoService) {
-        
+
         this.todoService.loadTodo();
+    }
+    setFilter(filter) {
+        this.ngRedux.dispatch(TodoAction.setFilter(filter));
     }
 
     ngOnInit() {
@@ -36,7 +41,9 @@ export class CkTodoApp {
             this.mapDispatchToThis)(this);
 
         this.unsubscribe = this.ngRedux.subscribe(() => {
+            let state = this.ngRedux.getState();
             this.applicationRef.tick();
+            this.items = state.todo.todos;
         });
     }
 
@@ -47,11 +54,11 @@ export class CkTodoApp {
 
     mapStateToThis(state) {
         return {
-            items: state.todo,
+            currentFilter: state.todo.current_filter,
             task: state.newtodo
         };
     }
-    
+
     mapDispatchToThis(dispatch) {
         return {
             add: (task) => dispatch(TodoAction.add(Object.assign({}, task))),
