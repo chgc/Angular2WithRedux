@@ -1538,13 +1538,10 @@ webpackJsonp([0],[
 	var TodoService_ts_1 = __webpack_require__(/*! ../../services/TodoService.ts */ 315);
 	var CkTodoApp = (function () {
 	    function CkTodoApp(ngRedux, applicationRef, todoService) {
-	        var _this = this;
 	        this.ngRedux = ngRedux;
 	        this.applicationRef = applicationRef;
 	        this.todoService = todoService;
-	        this.todoService.getTodo().subscribe(function (data) {
-	            _this.ngRedux.dispatch(TodoAction.init(data));
-	        });
+	        this.todoService.loadTodo();
 	    }
 	    CkTodoApp.prototype.ngOnInit = function () {
 	        var _this = this;
@@ -14321,20 +14318,29 @@ webpackJsonp([0],[
 	var __metadata = (this && this.__metadata) || function (k, v) {
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
+	var __param = (this && this.__param) || function (paramIndex, decorator) {
+	    return function (target, key) { decorator(target, key, paramIndex); }
+	};
 	var core_1 = __webpack_require__(/*! angular2/core */ 1);
 	var http_1 = __webpack_require__(/*! angular2/http */ 300);
 	__webpack_require__(/*! rxjs/Rx */ 316);
+	var TodoAction = __webpack_require__(/*! ../actions/ToDo */ 283);
 	var TodoService = (function () {
-	    function TodoService(http) {
+	    function TodoService(ngRedux, http) {
+	        this.ngRedux = ngRedux;
 	        this.http = http;
 	    }
-	    TodoService.prototype.getTodo = function () {
+	    TodoService.prototype.loadTodo = function () {
+	        var _this = this;
 	        return this.http.get('api/Values')
-	            .map(function (res) { return res.json(); });
+	            .map(function (res) { return res.json(); }).subscribe(function (data) {
+	            _this.ngRedux.dispatch(TodoAction.init(data));
+	        });
 	    };
 	    TodoService = __decorate([
-	        core_1.Injectable(), 
-	        __metadata('design:paramtypes', [http_1.Http])
+	        core_1.Injectable(),
+	        __param(0, core_1.Inject('ngRedux')), 
+	        __metadata('design:paramtypes', [Object, http_1.Http])
 	    ], TodoService);
 	    return TodoService;
 	}());

@@ -27,12 +27,9 @@ export class CkTodoApp {
         private applicationRef: ApplicationRef,
         private todoService: TodoService) {
         
-        this.todoService.getTodo().subscribe((data) => {
-            this.ngRedux.dispatch(TodoAction.init(data));    
-        })
+        this.todoService.loadTodo();
     }
 
-ß
     ngOnInit() {
         this.disconnect = this.ngRedux.connect(
             this.mapStateToThis,
