@@ -29,8 +29,8 @@ export class CkTodoPage {
         private applicationRef: ApplicationRef,
         private todoService: TodoService) {
 
-        // this.todoService.loadTodo();
-        this.ngRedux.dispatch(TodoAction.loadTodo());
+        this.todoService.loadTodo();
+        // this.ngRedux.dispatch(TodoAction.loadTodo());
     }
     setFilter(filter) {
         this.ngRedux.dispatch(TodoAction.setFilter(filter));

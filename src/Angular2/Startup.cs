@@ -38,7 +38,10 @@ namespace Angular2
             app.UseStaticFiles();
             app.Use(async (context, next) =>
             {
-                if (!Path.HasExtension(context.Request.Path.Value) && context.Request.HttpContext.Request.Headers["X-Requested-With"] != "XMLHttpRequest")
+                // 判斷request如果不是api call時，則要讀取index.html
+                if (!Path.HasExtension(context.Request.Path.Value) 
+                    && context.Request.HttpContext.Request.Headers["X-Custom-Header"] != "api"
+                    && context.Request.HttpContext.Request.Headers["X-Requested-With"] != "XMLHttpRequest")
                 {
                     await context.Response.WriteAsync(System.IO.File.ReadAllText("index.html"));
                 }
