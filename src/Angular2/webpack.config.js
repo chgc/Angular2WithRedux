@@ -18,7 +18,8 @@ const basePlugins = [
         minify: false
     }),
     new webpack.ProvidePlugin({
-    'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+        'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch',
+        _: "lodash"
   })
 ];
 
@@ -58,7 +59,8 @@ module.exports = {
             'immutable',
             'rxjs/Rx',
             'uuid',
-            'whatwg-fetch'
+            'whatwg-fetch',
+            'lodash'
         ]
     },
 
