@@ -4,6 +4,8 @@ import {createStore, applyMiddleware, compose} from 'redux';
 import {fromJS} from 'immutable';
 import ReduxThunk from 'redux-thunk';
 import rootReducer from '../reducers';
+import promiseMiddleware from '../middleware/promise-middleware';
+
 const persistState = require('redux-localstorage');
 
 function configureStore(initialState) {
@@ -22,6 +24,7 @@ function configureStore(initialState) {
 
 function _getMiddleware() {
     let middleware = [
+        promiseMiddleware,
         ReduxThunk
     ];
 
