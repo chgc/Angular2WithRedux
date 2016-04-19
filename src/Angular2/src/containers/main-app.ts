@@ -36,8 +36,7 @@ import { CkBookPage } from './book-page';
     {
         path: '/',
         name: 'TODO',
-        component: CkTodoPage,
-        useAsDefault: true
+        component: CkTodoPage
         },
     {
         path: '/book',

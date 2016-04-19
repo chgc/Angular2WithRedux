@@ -5,6 +5,7 @@ import {
     ApplicationRef
 } from 'angular2/core';
 
+
 @Component({
     selector: 'ck-book',
     providers: [],

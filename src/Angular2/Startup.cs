@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Builder;
+﻿using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNet.Http;
+using System.IO;
 
 namespace Angular2
 {
@@ -36,11 +34,19 @@ namespace Angular2
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseIISPlatformHandler();
-            app.UseDefaultFiles();
+            app.UseIISPlatformHandler();            
             app.UseStaticFiles();
+            app.Use(async (context, next) =>
+            {
+                if (!Path.HasExtension(context.Request.Path.Value) && context.Request.HttpContext.Request.Headers["X-Requested-With"] != "XMLHttpRequest")
+                {
+                    await context.Response.WriteAsync(System.IO.File.ReadAllText("index.html"));
+                }
+                await next();
+            });
 
             app.UseMvc();
+
         }
 
         // Entry point for the application.
