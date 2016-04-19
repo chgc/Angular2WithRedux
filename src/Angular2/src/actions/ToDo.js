@@ -33,17 +33,22 @@ function setFilter(filter) {
     };
 }
 exports.setFilter = setFilter;
-function reload() {
-    fetch('api/Values')
-        .then(function (response) {
-        return response.json();
-    })
-        .then(function (data) {
-        return {
-            type: constants_1.TODO_INIT,
-            payload: data
-        };
-    });
+function loadTodo() {
+    return function (dispatch) {
+        return fetch('api/Values')
+            .then(function (response) {
+            return response.json();
+        })
+            .then(function (data) {
+            return ({
+                type: constants_1.TODO_INIT,
+                payload: data
+            });
+        })
+            .then(function (action) {
+            dispatch(action);
+        });
+    };
 }
-exports.reload = reload;
+exports.loadTodo = loadTodo;
 //# sourceMappingURL=ToDo.js.map

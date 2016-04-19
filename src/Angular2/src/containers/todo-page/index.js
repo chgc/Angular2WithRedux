@@ -21,7 +21,8 @@ var CkTodoApp = (function () {
         this.applicationRef = applicationRef;
         this.todoService = todoService;
         this.currentFilter = "";
-        this.todoService.loadTodo();
+        // this.todoService.loadTodo();
+        this.ngRedux.dispatch(TodoAction.loadTodo());
     }
     CkTodoApp.prototype.setFilter = function (filter) {
         this.ngRedux.dispatch(TodoAction.setFilter(filter));

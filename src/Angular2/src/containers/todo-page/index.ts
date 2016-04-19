@@ -10,13 +10,13 @@ import {TodoService} from '../../services/TodoService.ts';
 import {visibleFilter} from '../../pipes/visiblefilter';
 
 @Component({
-    selector: 'ck-todo-app',
+    selector: 'ck-todo-page',
     providers: [TodoService],
     directives: [],
     pipes: [visibleFilter],
-    template: require('./TodoPage.html')
+    template: require('./Todo.html')
 })
-export class CkTodoApp {
+export class CkTodoPage {
     private disconnect: Function;
     private unsubscribe: Function;
 

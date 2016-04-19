@@ -4,6 +4,7 @@ var redux_1 = require('redux');
 var immutable_1 = require('immutable');
 var redux_thunk_1 = require('redux-thunk');
 var reducers_1 = require('../reducers');
+var promise_middleware_1 = require('../middleware/promise-middleware');
 var persistState = require('redux-localstorage');
 function configureStore(initialState) {
     // const store = compose(
@@ -15,6 +16,7 @@ function configureStore(initialState) {
 }
 function _getMiddleware() {
     var middleware = [
+        promise_middleware_1.default,
         redux_thunk_1.default
     ];
     if (__DEV__) {

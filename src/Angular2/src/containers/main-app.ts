@@ -5,7 +5,8 @@
 } from 'angular2/core';
 
 import { RouteConfig, ROUTER_DIRECTIVES } from 'angular2/router';
-import {CkTodoApp} from './todo-page';
+import { CkTodoPage } from './todo-page';
+import { CkBookPage } from './book-page';
 
 @Component({
     selector: 'rio-sample-app',
@@ -20,6 +21,10 @@ import {CkTodoApp} from './todo-page';
         <h1>
             Hello there. this is asp.net with angular2. build by webpack.
       </h1>
+      <a [routerLink]="['BOOK']"
+                class="text-decoration-none">BOOK</a>
+      <a [routerLink]="['TODO']"
+                class="text-decoration-none">TODO</a>
       <br />
       <main>
            <router-outlet></router-outlet>
@@ -31,8 +36,13 @@ import {CkTodoApp} from './todo-page';
     {
         path: '/',
         name: 'TODO',
-        component: CkTodoApp,
+        component: CkTodoPage,
         useAsDefault: true
+        },
+    {
+        path: '/book',
+        name: 'BOOK',
+        component: CkBookPage
     }
 ])
 export class CkDemoApp {
