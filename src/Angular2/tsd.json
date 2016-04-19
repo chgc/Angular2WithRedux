@@ -7,27 +7,6 @@
   "installed": {
     "whatwg-fetch/whatwg-fetch.d.ts": {
       "commit": "544a35a10866b32afda9c7f029c0764558563f4f"
-    },
-    "lodash/lodash.d.ts": {
-      "commit": "544a35a10866b32afda9c7f029c0764558563f4f"
-    },
-    "assertion-error/assertion-error.d.ts": {
-      "commit": "544a35a10866b32afda9c7f029c0764558563f4f"
-    },
-    "es6-shim/es6-shim.d.ts": {
-      "commit": "544a35a10866b32afda9c7f029c0764558563f4f"
-    },
-    "node/node.d.ts": {
-      "commit": "544a35a10866b32afda9c7f029c0764558563f4f"
-    },
-    "redux-logger/redux-logger.d.ts": {
-      "commit": "544a35a10866b32afda9c7f029c0764558563f4f"
-    },
-    "redux/redux.d.ts": {
-      "commit": "544a35a10866b32afda9c7f029c0764558563f4f"
-    },
-    "redux-thunk/redux-thunk.d.ts": {
-      "commit": "544a35a10866b32afda9c7f029c0764558563f4f"
     }
   }
 }

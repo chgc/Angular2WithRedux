@@ -366,9 +366,9 @@ webpackJsonp([0],{
 /***/ },
 
 /***/ 277:
-/*!*******************************************!*\
-  !*** ./~/redux/~/lodash/isPlainObject.js ***!
-  \*******************************************/
+/*!***********************************!*\
+  !*** ./~/lodash/isPlainObject.js ***!
+  \***********************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	var getPrototype = __webpack_require__(/*! ./_getPrototype */ 278),
@@ -446,9 +446,9 @@ webpackJsonp([0],{
 /***/ },
 
 /***/ 278:
-/*!*******************************************!*\
-  !*** ./~/redux/~/lodash/_getPrototype.js ***!
-  \*******************************************/
+/*!***********************************!*\
+  !*** ./~/lodash/_getPrototype.js ***!
+  \***********************************/
 /***/ function(module, exports) {
 
 	/* Built-in method references for those with the same name as other `lodash` methods. */
@@ -471,9 +471,9 @@ webpackJsonp([0],{
 /***/ },
 
 /***/ 279:
-/*!*******************************************!*\
-  !*** ./~/redux/~/lodash/_isHostObject.js ***!
-  \*******************************************/
+/*!***********************************!*\
+  !*** ./~/lodash/_isHostObject.js ***!
+  \***********************************/
 /***/ function(module, exports) {
 
 	/**
@@ -501,9 +501,9 @@ webpackJsonp([0],{
 /***/ },
 
 /***/ 280:
-/*!******************************************!*\
-  !*** ./~/redux/~/lodash/isObjectLike.js ***!
-  \******************************************/
+/*!**********************************!*\
+  !*** ./~/lodash/isObjectLike.js ***!
+  \**********************************/
 /***/ function(module, exports) {
 
 	/**
@@ -1976,7 +1976,7 @@ webpackJsonp([0],{
   \************************************************/
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"clearfix mx-auto col-8\">\r\n    <h3>TODO App</h3>\r\n    <div class=\"clearfix mxn2\">\r\n        <input type=\"text\" [(ngModel)]=\"task.content\" class=\"input inline-block\" />\r\n        <button class=\"btn btn-primary inline-block\" (click)=\"add(task)\">Add</button>\r\n    </div>\r\n    <div class=\"clearfix mxn2\">\r\n        <button (click)=\"setFilter('')\">All</button>\r\n        <button (click)=\"setFilter('SHOW_ACTIVE')\">Active</button>\r\n        <button (click)=\"setFilter('SHOW_COMPLETE')\">Complete</button>\r\n    </div>\r\n    <div class=\"clearfix mxn2\">\r\n        <ul class=\"list-reset\" *ngFor=\"#item of items | visibleFilter:currentFilter\">\r\n            <li [ngClass]=\"{'underline':item.complete}\">\r\n                <button (click)=\"finish(item)\">finish</button> {{ item.content }} <span (click)=\"remove(item)\">x</span>\r\n            </li>\r\n        </ul>\r\n    </div>\r\n</div>"
+	module.exports = "<div class=\"clearfix mx-auto col-8\">\n    <h3>TODO App</h3>\n    <div class=\"clearfix mxn2\">\n        <input type=\"text\" [(ngModel)]=\"task.content\" class=\"input inline-block\" />\n        <button class=\"btn btn-primary inline-block\" (click)=\"add(task)\">Add</button>\n    </div>\n    <div class=\"clearfix mxn2\">\n        <button (click)=\"setFilter('')\">All</button>\n        <button (click)=\"setFilter('SHOW_ACTIVE')\">Active</button>\n        <button (click)=\"setFilter('SHOW_COMPLETE')\">Complete</button>\n    </div>\n    <div class=\"clearfix mxn2\">\n        <ul class=\"list-reset\" *ngFor=\"#item of items | visibleFilter:currentFilter\">\n            <li [ngClass]=\"{'underline':item.complete}\">\n                <button (click)=\"finish(item)\">finish</button> {{ item.content }} <span (click)=\"remove(item)\">x</span>\n            </li>\n        </ul>\n    </div>\n</div>"
 
 /***/ },
 
@@ -2220,9 +2220,9 @@ webpackJsonp([0],{
 /***/ },
 
 /***/ 548:
-/*!********************************************!*\
-  !*** ./~/ng2-redux/~/invariant/browser.js ***!
-  \********************************************/
+/*!********************************!*\
+  !*** ./~/invariant/browser.js ***!
+  \********************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2286,7 +2286,7 @@ webpackJsonp([0],{
   \***************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global, _) {/**
+	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/**
 	 * @license
 	 * lodash 3.10.1 (Custom Build) <https://lodash.com/>
 	 * Build: `lodash modern -d -o ./index.js`
@@ -14638,7 +14638,7 @@ webpackJsonp([0],{
 	  }
 	}.call(this));
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../../webpack/buildin/module.js */ 52)(module), (function() { return this; }()), __webpack_require__(/*! lodash */ 549)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../../webpack/buildin/module.js */ 52)(module), (function() { return this; }())))
 
 /***/ }
 

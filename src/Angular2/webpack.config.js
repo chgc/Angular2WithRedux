@@ -18,9 +18,8 @@ const basePlugins = [
         minify: false
     }),
     new webpack.ProvidePlugin({
-        'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch',
-        _: "lodash"
-    })
+    'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+  })
 ];
 
 const devPlugins = [];
@@ -59,8 +58,7 @@ module.exports = {
             'immutable',
             'rxjs/Rx',
             'uuid',
-            'whatwg-fetch',
-            'lodash'
+            'whatwg-fetch'
         ]
     },
 
@@ -74,7 +72,7 @@ module.exports = {
 
     devtool: 'source-map',
 
-    resolve: {        
+    resolve: {
         extensions: ['', '.webpack.js', '.web.js', '.ts', '.js']
     },
 
