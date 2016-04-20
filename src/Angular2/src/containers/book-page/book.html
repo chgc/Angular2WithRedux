@@ -1,6 +1,42 @@
 <div class="clearfix mx-auto col-8">
     <h3>Booking</h3>
-    <div class="clearfix mxn2 border">
-        123
+    <div class="clearfix mxn2">
+        <form [ngFormModel]="form" (submit)="add($event)">
+            <div class="col col-4 mr2">
+                <label class="label">類別</label>
+                <select class="select" ngControl="category">
+                    <option value="">--選擇--</option>
+                    <option value="食">食</option>
+                    <option value="衣">衣</option>
+                </select>
+                <div *ngIf="!category.valid" class="red">
+                    類別 Required
+                </div>
+            </div>
+            <div class="col col-4 mr2">
+                <label class="label">金額</label>
+                <input class="input" type="number"
+                       ngControl="amon" />
+                <div *ngIf="!amon.valid" class="red">
+                    金額 Required
+                </div>
+            </div>
+            <div class="col col-3 mt3">
+                <button class="btn btn-primary" type="submit" [disabled]="!form.valid">新增</button>
+            </div>
+        </form>
+    </div>
+    <div class="clearfix mxn2 border overflow-auto" style="max-height: 700px;">
+        list
+        <ul>
+            <li *ngFor="#book of books">
+                <strong>
+                    {{ book.category }}
+                </strong>
+                <p>
+                    {{ book.amon | number}} - {{book.date | date:"yyyy-MM-dd"}}
+                </p>
+            </li>
+        </ul>
     </div>
 </div>

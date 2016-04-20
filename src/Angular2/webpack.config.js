@@ -50,7 +50,6 @@ module.exports = {
             'es6-shim',
             'es6-promise',
             'angular2/bundles/angular2-polyfills',
-            'angular2/bootstrap',
             'angular2/platform/browser',
             'angular2/platform/common_dom',
             'angular2/core',

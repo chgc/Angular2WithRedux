@@ -1,5 +1,5 @@
 ﻿import { enableProdMode, provide } from 'angular2/core';
-import { bootstrap} from 'angular2/bootstrap';
+import {bootstrap} from 'angular2/platform/browser';
 import { HTTP_PROVIDERS, BaseRequestOptions, RequestOptions, Headers } from 'angular2/http';
 import { ROUTER_PROVIDERS, APP_BASE_HREF } from 'angular2/router';
 import configureStore from './store/configure-store';

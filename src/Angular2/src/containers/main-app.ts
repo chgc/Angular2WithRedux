@@ -9,7 +9,7 @@ import { CkTodoPage } from './todo-page';
 import { CkBookPage } from './book-page';
 
 @Component({
-    selector: 'rio-sample-app',
+    selector: 'ck-sample-app',
     directives: [
         ROUTER_DIRECTIVES
     ],
