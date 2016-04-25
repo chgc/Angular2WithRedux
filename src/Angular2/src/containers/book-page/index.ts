@@ -1,7 +1,8 @@
 import {
     Component,
     Inject,
-    ApplicationRef
+    ApplicationRef,
+    ViewEncapsulation
 } from 'angular2/core';
 
 import {FORM_DIRECTIVES, FormBuilder, Validators, ControlGroup, Control} from 'angular2/common';
@@ -13,7 +14,13 @@ import {FORM_DIRECTIVES, FormBuilder, Validators, ControlGroup, Control} from 'a
     providers: [],
     directives: [FORM_DIRECTIVES],
     pipes: [],
-    template: require('./book.html')
+    template: require('./book.html'),
+    styles: [`
+        h3 {
+           color: red
+        }
+    `],
+    encapsulation: ViewEncapsulation.Emulated
 })
 export class CkBookPage {
     private disconnect: Function;

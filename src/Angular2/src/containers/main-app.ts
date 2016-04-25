@@ -21,6 +21,7 @@ import { CkBookPage } from './book-page';
         <h1>
             Hello there. this is asp.net with angular2. build by webpack.
       </h1>
+        <h3>Style test</h3>
       <a [routerLink]="['BOOK']"
                 class="text-decoration-none">BOOK</a>
       <a [routerLink]="['TODO']"
