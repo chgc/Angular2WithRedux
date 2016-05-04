@@ -10,7 +10,7 @@
         <button (click)="setFilter('SHOW_COMPLETE')">Complete</button>
     </div>
     <div class="clearfix mxn2">
-        <ul class="list-reset" *ngFor="#item of items | visibleFilter:currentFilter">
+        <ul class="list-reset" *ngFor="let item of items | visibleFilter:currentFilter">
             <li [ngClass]="{'underline':item.complete}">
                 <button (click)="finish(item)">finish</button> {{ item.content }} <span (click)="remove(item)">x</span>
             </li>

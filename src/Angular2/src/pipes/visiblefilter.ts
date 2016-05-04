@@ -6,21 +6,18 @@ import {Pipe, PipeTransform} from '@angular/core';
     name: 'visibleFilter'
 })
 export class visibleFilter {
-    transform(todos, args) {
-        let data = [];
-        if (isBlank(args) || args.length == 0) {
-            throw new BaseException('VisibleTodos pipe requires one argument');
-        }
+    transform(todos, args) {        
+        let data = [];                
         if(todos){
             data = todos.toArray();
         }
         if (isPresent(data) && !isArray(data)) {
             throw new BaseException('VisibleTodos pipe requires an Array as input');
         }
-        return this.getVisibleTodos(data, args[0]);
+        return this.getVisibleTodos(data, args);
     }
 
-    getVisibleTodos(todos, filter) {
+    getVisibleTodos(todos, filter) {        
         switch (filter) {
             case 'SHOW_ACTIVE':
                 return todos.filter(t => !t.complete);
