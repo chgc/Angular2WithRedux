@@ -3,7 +3,7 @@
     ViewEncapsulation,
     Inject,
     ApplicationRef
-} from 'angular2/core';
+} from '@angular/core';
 
 import * as TodoAction from '../../actions/ToDo';
 import {TodoService} from '../../services/TodoService.ts';

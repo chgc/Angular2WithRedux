@@ -20,7 +20,7 @@ const basePlugins = [
     new webpack.ProvidePlugin({
         'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch',
         _: "lodash"
-  })
+    })
 ];
 
 const devPlugins = [];
@@ -44,23 +44,8 @@ const plugins = basePlugins
 
 module.exports = {
     entry: {
-        app: './src/index.ts',
-        vendor: [
-            'es5-shim',
-            'es6-shim',
-            'es6-promise',
-            'angular2/bundles/angular2-polyfills',
-            'angular2/platform/browser',
-            'angular2/platform/common_dom',
-            'angular2/core',
-            'angular2/router',
-            'angular2/http',
-            'immutable',
-            'rxjs/Rx',
-            'uuid',
-            'whatwg-fetch',
-            'lodash'
-        ]
+        vendor: './src/vendor.ts',
+        app: './src/index.ts'
     },
 
     output: {

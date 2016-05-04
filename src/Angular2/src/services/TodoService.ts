@@ -1,6 +1,6 @@
-import {Injectable, Inject } from 'angular2/core';
+import {Injectable, Inject } from '@angular/core';
 
-import {Http, Response} from 'angular2/http';
+import {Http, Response} from '@angular/http';
 import 'rxjs/Rx';
 import {TODO_INIT} from '../constants';
 import * as TodoAction from '../actions/ToDo';

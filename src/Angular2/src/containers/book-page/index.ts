@@ -3,9 +3,9 @@ import {
     Inject,
     ApplicationRef,
     ViewEncapsulation
-} from 'angular2/core';
+} from '@angular/core';
 
-import {FORM_DIRECTIVES, FormBuilder, Validators, ControlGroup, Control} from 'angular2/common';
+import {FORM_DIRECTIVES, FormBuilder, Validators, ControlGroup, Control} from '@angular/common';
 
 
 

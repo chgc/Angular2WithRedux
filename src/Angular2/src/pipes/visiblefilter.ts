@@ -1,6 +1,6 @@
-import {isBlank, isPresent, isArray} from 'angular2/src/facade/lang';
-import {BaseException} from 'angular2/src/facade/exceptions';
-import {Pipe, PipeTransform} from 'angular2/core';
+import {isBlank, isPresent, isArray} from '@angular/core/src/facade/lang';
+import {BaseException} from '@angular/core/src/facade/exceptions';
+import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
     name: 'visibleFilter'

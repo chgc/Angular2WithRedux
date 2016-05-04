@@ -1,7 +1,8 @@
-﻿import { enableProdMode, provide } from 'angular2/core';
-import {bootstrap} from 'angular2/platform/browser';
-import { HTTP_PROVIDERS, BaseRequestOptions, RequestOptions, Headers } from 'angular2/http';
-import { ROUTER_PROVIDERS, APP_BASE_HREF } from 'angular2/router';
+﻿import { enableProdMode, provide } from '@angular/core';
+import { bootstrap }    from '@angular/platform-browser-dynamic';
+import { HTTP_PROVIDERS, BaseRequestOptions, RequestOptions, Headers } from '@angular/http';
+import { ROUTER_PROVIDERS } from '@angular/router-deprecated';
+import { APP_BASE_HREF } from '@angular/common';
 import configureStore from './store/configure-store';
 import { CkDemoApp } from './containers/main-app';
 

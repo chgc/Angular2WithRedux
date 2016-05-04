@@ -2,9 +2,9 @@
     Component,
     ViewEncapsulation,
     Inject
-} from 'angular2/core';
+} from '@angular/core';
 
-import { RouteConfig, ROUTER_DIRECTIVES } from 'angular2/router';
+import { RouteConfig, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
 import { CkTodoPage } from './todo-page';
 import { CkBookPage } from './book-page';
 

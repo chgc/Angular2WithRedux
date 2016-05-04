@@ -8,9 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var lang_1 = require('angular2/src/facade/lang');
-var exceptions_1 = require('angular2/src/facade/exceptions');
-var core_1 = require('angular2/core');
+var lang_1 = require('@angular/core/src/facade/lang');
+var exceptions_1 = require('@angular/core/src/facade/exceptions');
+var core_1 = require('@angular/core');
 var visibleFilter = (function () {
     function visibleFilter() {
     }

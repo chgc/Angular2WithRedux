@@ -11,15 +11,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var core_1 = require('angular2/core');
+var core_1 = require('@angular/core');
+var common_1 = require('@angular/common');
 var CkBookPage = (function () {
-    function CkBookPage(ngRedux, applicationRef) {
+    function CkBookPage(ngRedux, applicationRef, builder) {
         this.ngRedux = ngRedux;
         this.applicationRef = applicationRef;
-        this.currentFilter = "";
+        this.builder = builder;
+        this.books = [];
     }
+    CkBookPage.prototype.add = function (event) {
+        console.log(this.form.value);
+        var _value = Object.assign({}, this.form.value);
+        _value.date = new Date();
+        this.books.push(_value);
+        event.preventDefault();
+    };
     CkBookPage.prototype.ngOnInit = function () {
         var _this = this;
+        this.amon = new common_1.Control("", common_1.Validators.required);
+        this.category = new common_1.Control("", common_1.Validators.required);
+        this.form = this.builder.group({
+            category: this.category,
+            amon: this.amon
+        });
         this.disconnect = this.ngRedux.connect(this.mapStateToThis, this.mapDispatchToThis)(this);
         this.unsubscribe = this.ngRedux.subscribe(function () {
             _this.applicationRef.tick();
@@ -39,12 +54,14 @@ var CkBookPage = (function () {
         core_1.Component({
             selector: 'ck-book',
             providers: [],
-            directives: [],
+            directives: [common_1.FORM_DIRECTIVES],
             pipes: [],
-            template: require('./book.html')
+            template: require('./book.html'),
+            styles: ["\n        h3 {\n           color: red\n        }\n    "],
+            encapsulation: core_1.ViewEncapsulation.Emulated
         }),
         __param(0, core_1.Inject('ngRedux')), 
-        __metadata('design:paramtypes', [Object, core_1.ApplicationRef])
+        __metadata('design:paramtypes', [Object, core_1.ApplicationRef, common_1.FormBuilder])
     ], CkBookPage);
     return CkBookPage;
 }());
